@@ -10,9 +10,6 @@ class DistributionalCrossEntropyDistance(nn.Module):
     def forward(self, pred, true):
         return -torch.sum(true * torch.log(torch.clip(F.softmax(pred, dim=-1), 1e-9, 1)), dim=-1) / (np.log(true.shape[-1]))
 
-def gaussian_kernel(M, std):
-    """"""
-
 class SmoothedCrossEntropyDistance(nn.Module):
     """The 'smoothed cross entropy' mentioned in the paper."""
      
@@ -23,7 +20,7 @@ class SmoothedCrossEntropyDistance(nn.Module):
                k: The number of segments.
                sigma: The standarad deviation used in the gaussian kernel.
         """
-        super.__init__()
+        super().__init__()
         self.k = k
         self.sigma = sigma
         self.cache = {}
